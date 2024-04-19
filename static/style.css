@@ -1,0 +1,84 @@
+.container {
+  width: 50%;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  position: absolute; /* Заменяем fixed на absolute */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #6c5b7b, #c06c84, #f67280, #f8b195);
+  height: 100vh;
+  display: flex; /* Растянем body на всю высоту */
+  justify-content: center; /* Выравнивание содержимого по центру горизонтально */
+  align-items: center; /* Выравнивание содержимого по центру вертикально */
+  position:relative;
+  
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 50px;
+  position: sticky;
+  top: 100px; /* Например, таблица останется на 100px от верха */
+  z-index: 1; /* Чтобы таблица оставалась поверх других элементов */
+}
+
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid white;
+}
+
+th {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+#convertForm input[type="text"] {
+  width: 94%; /* Устанавливаем ширину 98% от ширины контейнера */
+  padding: 20px;
+  margin: 20px auto; /* Центрируем элементы формы */
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+}
+
+/* Стили для выпадающего списка */
+#convertForm select {
+  width: 98%; /* Устанавливаем ширину 98% от ширины контейнера */
+  padding: 20px;
+  margin: 20px auto; /* Центрируем элементы формы */
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.5);
+  color: black;
+}
+
+#convertForm button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  cursor: pointer;
+}
+
+#convertForm button[type="submit"]:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Convert Currency</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Convert Currency</h1>
+        <p>
+        <form id="convertForm">
+            <input type="text" id="amount" name="amount" placeholder="Enter amount">
+            <!-- из какой валюты -->
+            <select id="from_currency" name="from_currency">
+            <option value="RUB">Российский рубль</option>
+              <option value="USD">Доллар США</option>
+              <option value="EUR">Евро</option>
+              <option value="BYN">Белорусский рубль</option>
+              <option value="JPY">Японских иен</option>
+              <option value="AED">Дирхам ОАЭ</option>
+              <option value="PLN">Польский злотый</option>
+            </select>
+            <!-- в какую переводим -->
+            <select id="to_currency" name="to_currency">
+                <option value="RUB">Российский рубль</option>
+                <option value="USD">Доллар США</option>
+                <option value="EUR">Евро</option>
+                <option value="BYN">Белорусский рубль</option>
+                <option value="JPY">Японских иен</option>
+                <option value="AED">Дирхам ОАЭ</option>
+                <option value="PLN">Польский злотый</option>
+            </select>
+            <button type="submit">Convert</button>
+        </form>
+        </p>
+        <p>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>From Currency</th>
+                    <th>To Currency</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody">
+            </tbody>
+        </table>
+        </p>
+    </div>
+    <script>
+        document.getElementById('convertForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(this);
+            const response = await fetch(`/convert?${new URLSearchParams(formData).toString()}`);
+            
+            const data = await response.json();
+            const resultsBody = document.getElementById('resultsBody');
+            
+            // Проверяем количество строк в таблице
+            if (resultsBody.rows.length >= 6) {
+                // Удаляем последнюю строку (самую старую)
+                resultsBody.deleteRow(-1); // -1 используется для удаления последней строки
+            }
+            
+            // Вставляем новую строку в начало таблицы
+            const newRow = resultsBody.insertRow(0);
+            const fromCurrencyCell = newRow.insertCell(0);
+            const toCurrencyCell = newRow.insertCell(1);
+            const amountCell = newRow.insertCell(2);
+            
+            fromCurrencyCell.textContent = data.from_currency;
+            toCurrencyCell.textContent = data.to_currency;
+            amountCell.textContent = data.amount;
+        });
+    </script>
+</body>
+</html>
